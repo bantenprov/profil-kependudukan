@@ -1,0 +1,105 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+	<div class="row">		
+		<div class="col-md-12">
+			<a href="{{ route('kependudukan.index') }}" class="btn btn-xs btn-primary">Back</a>
+			<br>
+			<br>
+			<div class="panel panel-default">
+				<div class="panel-heading">					
+					Add Penduduk
+					<div>
+					@if ($errors->any())
+					    					        
+			            @foreach ($errors->all() as $error)
+			                <div class="alert alert-danger">{{ $error }}</div>
+			            @endforeach					        
+					    
+					@endif
+					@if(session()->has('message'))
+					    <div class="alert alert-success">					        
+					    	{{ session()->get('message') }}
+					    </div>
+					@endif
+					</div> 
+				</div>
+
+				<div class="panel-body">
+					{!! Form::open(['route' => ['kependudukan.update',$penduduk->id],'method' => 'put']) !!}
+						<div class="form-group">
+							<label for="">User</label>
+							<select name="user_id" class="form-control input-sm">
+								<option value="">-User-</option>
+								@foreach($users as $user)
+									<option value="{{ $user->id }}"
+										{{ ($user->id == $penduduk->getUser->id) ? 'selected' : ''}}
+										>{{ $user->name }}</option>
+								@endforeach
+							</select>							
+						</div>
+						<div class="form-group">
+							<label for="">Nama Lengkap</label>
+							<input value="{{ $penduduk->nama_lengkap }}" type="text" name="nama_lengkap" class="form-control input-sm" placeholder="Nama Lengkap">
+						</div>						
+						<div class="form-group">
+							<label for="">Jenis Kelamin</label>
+							<br>		
+								@if($penduduk->jenis_kelamin == "L")
+									<input name="jenis_kelamin" type="radio" name="optionsRadios" id="optionsRadios1" value="L" checked>Laki-Laki
+
+						    		<input name="jenis_kelamin" type="radio" name="optionsRadios" id="optionsRadios1" value="P">Perempuan
+						    	@else
+						    		<input name="jenis_kelamin" type="radio" name="optionsRadios" id="optionsRadios1" value="L">Laki-Laki
+
+						    		<input name="jenis_kelamin" type="radio" name="optionsRadios" id="optionsRadios1" value="P" checked>Perempuan
+								@endif					
+						    	
+						</div>
+						<div class="form-group">
+							<label for="">Agama</label>
+							<br>							
+						    	<input name="agama" type="radio" name="optionsRadios" id="optionsRadios1" value="islam"
+								{{ ($penduduk->agama == "islam" ) ? 'checked' : '' }}
+						    	>Islam
+								<br>
+						    	<input name="agama" type="radio" name="optionsRadios" id="optionsRadios1" value="kristen"
+								{{ ($penduduk->agama == "kristen" ) ? 'checked' : '' }}>Kristen
+								<br>
+						    	<input name="agama" type="radio" name="optionsRadios" id="optionsRadios1" value="hindu"
+								{{ ($penduduk->agama == "hindu" ) ? 'checked' : '' }}>Hindu
+								<br>
+						    	<input name="agama" type="radio" name="optionsRadios" id="optionsRadios1" value="budha"
+								{{ ($penduduk->agama == "budha" ) ? 'checked' : '' }}>Budha
+						</div>
+						<div class="form-group">
+							<label for="">Pekerjaan</label>
+							<input type="text" name="pekerjaan" class="form-control input-sm" placeholder="Pekerjaan" value="{{ $penduduk->pekerjaan }}">
+						</div>			
+						<div class="form-group">
+							<label for="">Status Kawin</label>
+							<br>							
+						    @if($penduduk->status_perkawinan == "belum kawin")
+								<input name="status_perkawinan" type="radio" name="optionsRadios" id="optionsRadios1" value="belum kawin" checked>Belum Kawin
+
+						    	<input name="status_perkawinan" type="radio" name="optionsRadios" id="optionsRadios1" value="kawin">Kawin
+					    	@else
+					    		<input name="status_perkawinan" type="radio" name="optionsRadios" id="optionsRadios1" value="belum kawin">Belum Kawin
+
+						    	<input name="status_perkawinan" type="radio" name="optionsRadios" id="optionsRadios1" value="kawin" checked>Kawin
+							@endif	
+						</div>
+						<div class="form-group">
+							<label for="">Alamat</label>
+							<textarea name="alamat" placeholder="Alamat" class="form-control" rows="3">{{ $penduduk->alamat }}</textarea>
+						</div>						
+						<button type="submit" class="btn btn-default">Submit</button>
+					{!! Form::close() !!}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+

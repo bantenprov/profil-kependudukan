@@ -1,0 +1,75 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">    	
+        <div class="col-md-12">        	
+        	<a href="{{ route('home') }}" class="btn btn-xs btn-primary">Back</a>
+        	<br>
+        	<br>Search :
+        	{!! Form::open(['route' => 'kependudukan.index','method' => 'get']) !!}
+						
+				<div class="input-group">
+					<input type="text" name="search" value="{{ Request::get('search') }}" class="form-control input-sm" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
+					</span>
+				</div><!-- /input-group -->
+			
+			{!! Form::close() !!}
+			<br>
+            <div class="panel panel-default">
+                <div class="panel-heading">                	
+                	Kependudukan                	
+					<span class="pull-right">						
+						<a href="{{ route('kependudukan.create') }}" class="bnt btn-xs btn-success"><i class="fa fa-plus"></i> Add</a>
+					</span>			
+                </div>
+
+                <div class="panel-body">
+                	@if ($errors->any())
+					    					        
+			            @foreach ($errors->all() as $error)
+			                <div class="alert alert-danger">{{ $error }}</div>
+			            @endforeach					        
+					    
+					@endif
+					@if(session()->has('message'))
+					    <div class="alert alert-success">
+					    	{{ session()->get('message') }}
+					    </div>
+					@endif
+					<div class="table-responsive">
+	                    <table class="table table-striped">
+							<tr>
+								<th>Nama Lengkap</th>
+								<th>Jenis Kelamin</th>
+								<th>Agama</th>
+								<th>Pekerjaan</th>
+								<th>Status Perkawinan</th>
+								<th>Alamat</th>
+								<th width="100px">Action</th>
+							</tr>
+							@foreach($penduduks as $penduduk)
+							<tr>
+								<td>{{ $penduduk->nama_lengkap }}</td>
+								<td>{{ ($penduduk->jenis_kelamin == "L") ? 'Laki-Laki' : 'Perempuan' }}</td>
+								<td>{{ $penduduk->agama }}</td>
+								<td>{{ $penduduk->pekerjaan }}</td>
+								<td>{{ $penduduk->status_perkawinan }}</td>
+								<td>{{ $penduduk->alamat }}</td>
+								<td>
+									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+									<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+							@endforeach
+						</table>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

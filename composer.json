@@ -1,0 +1,24 @@
+{
+    "name": "bantenprov/profil-kependudukan",
+    "description": "The ProfilKependudukan package",
+    "authors": [
+        {
+            "name": "bantenprov",
+            "email": "developoer.bantenprov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/support": "5.4.*",
+        "laravelcollective/html": "^5.4.0"
+    },
+    "autoload": {
+        "files": [
+            "src/helpers/helpers.php"
+        ],
+        "psr-4": {
+            "Bantenprov\\ProfilKependudukan\\": "src"
+        }
+    },
+    "minimum-stability": "stable"
+}

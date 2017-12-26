@@ -1,0 +1,75 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+	<div class="row">		
+		<div class="col-md-12">
+			<a href="{{ route('kependudukan.index') }}" class="btn btn-xs btn-primary">Back</a>
+			<br>
+			<br>
+			<div class="panel panel-default">
+				<div class="panel-heading">					
+					Detail Penduduk
+					<span class="pull-right">
+						<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="bnt btn-xs btn-success"><i class="fa fa-pencil"></i> Edit</a>
+					</span>
+					<div>
+					@if ($errors->any())
+					    					        
+			            @foreach ($errors->all() as $error)
+			                <div class="alert alert-danger">{{ $error }}</div>
+			            @endforeach					        
+					    
+					@endif
+					@if(session()->has('message'))
+					    <div class="alert alert-success">					        
+					    	{{ session()->get('message') }}
+					    </div>
+					@endif
+					</div> 
+				</div>
+
+				<div class="panel-body">
+					<table>
+						<tr>
+							<td>NIK</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->getUser->nik }}</td>
+						</tr>
+						<tr>
+							<td>Nama Lengkap</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->nama_lengkap }}</td>
+						</tr>
+						<tr>
+							<td>Jenis Kelamin</td>
+							<td width="20px">:</td>
+							<td>{{ ($penduduk->jenis_kelamin == "L") ? 'Laki-Laki' : 'Perempuan' }}</td>
+						</tr>
+						<tr>
+							<td>Agama</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->agama }}</td>
+						</tr>
+						<tr>
+							<td>Pekerjaan</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->pekerjaan }}</td>
+						</tr>
+						<tr>
+							<td>Status Perkawinan</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->status_perkawinan }}</td>
+						</tr>
+						<tr>
+							<td>alamat</td>
+							<td width="20px">:</td>
+							<td>{{ $penduduk->alamat }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
