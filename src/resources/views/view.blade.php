@@ -1,0 +1,1 @@
+This is demo view file for Bantenprov\ProfilKependudukan package using blade template

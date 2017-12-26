@@ -1,0 +1,177 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\User;
+use App\Penduduk;
+use App\Pegawai;
+use Validator;
+
+class PendudukApiController extends Controller
+{
+    protected $userModel;
+    protected $pegawaiModel;
+    protected $pendudukModel;
+
+    public function __construct()
+    {
+        $this->userModel = new User;
+        $this->pegawaiModel = new Pegawai;
+        $this->pendudukModel = new Penduduk;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        
+        $penduduks = $this->pendudukModel->all();
+        return response()->json([
+            'data_penduduk' => $penduduks
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        $validator = Validator::make($request->all(),[
+            'user_id'               => 'required',
+            'nama_lengkap'          => 'required',
+            'status_perkawinan'     => 'required',
+            'pekerjaan'             => 'required',
+            'agama'                 => 'required',
+            'alamat'                => 'required',
+            'jenis_kelamin'         => 'required'            
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors' => $validator
+            ]); 
+        }
+
+        try {
+            $this->pendudukModel->create($request->all());
+            return response()->json([
+                'message' => 'Add data success'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Critical Error'
+            ]);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $penduduk = $this->pendudukModel->findOrFail($id);
+            $users = $this->userModel->all();
+            $user = $pegawai->getUser;
+            return response()->json([
+                'data_penduduk' => $penduduk
+            ]);            
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'No result'
+            ]);
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),[
+            'user_id'               => 'required',
+            'nama_lengkap'          => 'required',
+            'status_perkawinan'     => 'required',
+            'pekerjaan'             => 'required',
+            'agama'                 => 'required',
+            'alamat'                => 'required',
+            'jenis_kelamin'         => 'required'             
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors' => $validator
+            ]);
+        }
+
+        try {
+            $this->pendudukModel->findOrFail($id)->update($request->all());
+            return response()->json([
+                'message' => 'Update data success'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Critical Error'
+            ]);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $this->pendudukModel->findOrFail($id)->delete();
+            return response()->json([
+                'message' => 'Delete data success'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Critical Error'
+            ]);
+        }
+
+    }
+}
+
