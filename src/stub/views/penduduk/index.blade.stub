@@ -61,7 +61,11 @@
 								<td>
 									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 									<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
-									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+
+									{{ Form::open(['route' => ['kependudukan.destroy',$penduduk->id], 'class' => 'pull-right']) }}
+					                    {{ Form::hidden('_method', 'DELETE') }}
+					                    <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
+					                {{ Form::close() }}									
 								</td>
 							</tr>
 							@endforeach
