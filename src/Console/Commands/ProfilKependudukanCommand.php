@@ -1,6 +1,7 @@
 <?php namespace Bantenprov\ProfilKependudukan\Console\Commands;
 
 use Illuminate\Console\Command;
+use File;
 
 /**
  * The ProfilKependudukanCommand class.
@@ -55,7 +56,7 @@ class ProfilKependudukanCommand extends Command
     ];
 
     protected $stubsPenduduk = [                  
-        'Penduduk' => [
+        'penduduk' => [
             'index.blade.stub',
             'create.blade.stub',
             'show.blade.stub',
@@ -132,8 +133,17 @@ class ProfilKependudukanCommand extends Command
      */
     public function handle()
     {   
-        File::makeDirectory(base_path('app/Http/Controllers/Api'));
-        File::makeDirectory(base_path('resources/views/penduduk'));
+
+        if(!File::exists(base_path('app/Http/Controllers/Api')))
+        {
+            File::makeDirectory(base_path('app/Http/Controllers/Api'));
+        }
+
+        if(!File::exists(base_path('resources/views/penduduk')))
+        {
+            File::makeDirectory(base_path('resources/views/penduduk'));
+        }        
+        
         File::append(base_path('routes/web.php'),"\n".File::get(__DIR__.'/../../stub/web.stub'));        
         File::append(base_path('routes/api.php'),"\n".File::get(__DIR__.'/../../stub/api.stub'));
         
