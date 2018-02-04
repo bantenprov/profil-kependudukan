@@ -4,14 +4,14 @@
 <div class="container">
 	<div class="row">		
 		<div class="col-md-12">
-			<a href="{{ route('kependudukan.index') }}" class="btn btn-xs btn-primary">Back</a>
+			<a href="{{ route('kependudukan.index') }}" class="btn btn-sm btn-primary">Back</a>
 			<br>
 			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">					
 					Detail Penduduk
 					<span class="pull-right">
-						<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="bnt btn-xs btn-success"><i class="fa fa-pencil"></i> Edit</a>
+						<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="bnt btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>
 					</span>
 					<div>
 					@if ($errors->any())

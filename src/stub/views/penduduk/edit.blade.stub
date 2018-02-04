@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">		
 		<div class="col-md-12">
-			<a href="{{ route('kependudukan.index') }}" class="btn btn-xs btn-primary">Back</a>
+			<a href="{{ route('kependudukan.index') }}" class="btn btn-sm btn-primary">Back</a>
 			<br>
 			<br>
 			<div class="panel panel-default">
@@ -28,6 +28,7 @@
 
 				<div class="panel-body">
 					{!! Form::open(['route' => ['kependudukan.update',$penduduk->id],'method' => 'put']) !!}
+						<input type="hidden" name="old_user_id" value="{{ $penduduk->getUser->id }}">
 						<div class="form-group">
 							<label for="">User</label>
 							<select name="user_id" class="form-control input-sm">
@@ -94,7 +95,7 @@
 							<label for="">Alamat</label>
 							<textarea name="alamat" placeholder="Alamat" class="form-control" rows="3">{{ $penduduk->alamat }}</textarea>
 						</div>						
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-sm btn-success">Submit</button>
 					{!! Form::close() !!}
 				</div>
 			</div>

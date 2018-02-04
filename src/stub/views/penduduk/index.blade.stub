@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">    	
         <div class="col-md-12">        	
-        	<a href="{{ route('home') }}" class="btn btn-xs btn-primary">Back</a>
+        	<a href="{{ route('home') }}" class="btn btn-sm btn-primary">Back</a>
         	<br>
         	<br>Search :
         	{!! Form::open(['route' => 'kependudukan.index','method' => 'get']) !!}
@@ -22,7 +22,7 @@
                 <div class="panel-heading">                	
                 	Kependudukan                	
 					<span class="pull-right">						
-						<a href="{{ route('kependudukan.create') }}" class="bnt btn-xs btn-success"><i class="fa fa-plus"></i> Add</a>
+						<a href="{{ route('kependudukan.create') }}" class="bnt btn-sm btn-success"><i class="fa fa-plus"></i> Add</a>
 					</span>			
                 </div>
 
@@ -48,7 +48,7 @@
 								<th>Pekerjaan</th>
 								<th>Status Perkawinan</th>
 								<th>Alamat</th>
-								<th width="100px">Action</th>
+								<th width="110px">Action</th>
 							</tr>
 							@foreach($penduduks as $penduduk)
 							<tr>
@@ -59,12 +59,12 @@
 								<td>{{ $penduduk->status_perkawinan }}</td>
 								<td>{{ $penduduk->alamat }}</td>
 								<td>
-									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
-									<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+									<a href="{{ route('kependudukan.show',$penduduk->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+									<a href="{{ route('kependudukan.edit',$penduduk->id) }}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
 
 									{{ Form::open(['route' => ['kependudukan.destroy',$penduduk->id], 'class' => 'pull-right']) }}
 					                    {{ Form::hidden('_method', 'DELETE') }}
-					                    <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
+					                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
 					                {{ Form::close() }}									
 								</td>
 							</tr>
