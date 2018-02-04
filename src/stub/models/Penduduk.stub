@@ -21,7 +21,7 @@ class Penduduk extends Model
 
     public function getUser()
 	{
-		return $this->hasOne('App\User','id');	
+		return $this->belongsTo('App\User','user_id','id');	
 	}
 
 }
